@@ -1,0 +1,44 @@
+Estructura de proyecto ML
+
+1.  Entendimiento del Negocio
+    Contexto
+    Datos relevantes
+    Hipótesis y tesis consideradas
+    KPI's relevantes
+    Problema de negocio (Predicción) 
+2. Entendimiento Datos
+    Identificar Tipos de variables/atributos
+    Identificar Nulo
+    Identificar Outliers
+    Transformaciones
+        A numéricos (Encoder)
+        Tratamiento de Nulos
+        Tratamiento de Outliers 
+    Análisis estadísticos básicos 
+    Matriz de Correlación 
+    Patrones/comportamientos detectados
+    Nuevas variables a partir de análisis
+    Matriz de Correlación 
+    Patrones/comportamientos detectados con nuevas variables
+3. Transformación 
+    Escalamiento
+4. Modelamientamiento
+    Modelos de regresión
+        Selección de variables (X/Y)
+        Selección de parámetros 
+        Aplicación de modelos
+        Obtención de métricas 
+    Modelos de clasificación
+        Selección de variables (X/Y)
+        Selección de parámetros 
+        Aplicación de modelos
+        Obtención de métricas 
+    Modelos de Cluster 
+        Selección de variables (X)
+        Selección de parámetros 
+        Aplicación de modelos
+        Obtención de métricas 
+5. Evaluación
+    Metricas (matriz de confusión, r, RMSE)
+    Mejoras del proceso o modelamiento
+6. Deploy 
