@@ -17,7 +17,8 @@ Predecir y describir el comportamiento climático aplicando cada técnica a la v
 Todo se carga **en memoria** desde las *raw URLs* del repositorio público [`4mnesia/DataMining_Datos`](https://github.com/4mnesia/DataMining_Datos) (no se descarga ni se clona nada al disco). Dos datasets:
 
 1. **Meteorológico (estaciones DMC de Chile)** — `dataset_precipitaciones_temperaturas_chile.csv`: precipitación y temperatura por estación-día.
-2. **Atmosférico (reanálisis NASA POWER)** — `atmosfera_diario.csv`: humedad, viento, radiación, nubosidad, presión, etc. por estación-día. Fuente: [NASA POWER](https://power.larc.nasa.gov/) (API `temporal/daily/point`).
+2. **Atmosférico (reanálisis NASA POWER)** — `atmosfera_diario.csv`: humedad, viento, radiación, nubosidad, presión, etc. por estación-día. Fuente: [NASA POWER](https://power.larc.nasa.gov/) (API `temporal/daily/point`). Se carga directamente desde el raw del repo de datos:
+   `https://raw.githubusercontent.com/4mnesia/DataMining_Datos/refs/heads/main/atmosfera_diario.csv`
 
 Apoyo: metadata de estaciones (`getEstacionesRedEma.json`), raster Köppen-Geiger 1 km (`.tif`, leído con PIL) y GeoJSON de Chile.
 
