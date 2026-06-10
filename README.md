@@ -7,8 +7,8 @@ Proyecto académico de **Minería de Datos** (metodología CRISP-DM) sobre preci
 Predecir y describir el comportamiento climático aplicando cada técnica a la variable que mejor predice:
 
 - **Regresión → temperatura media diaria** (`temp_media`). R² ≈ **0.93** (SVR), RMSE ≈ 1.5 °C.
-- **Clasificación → ocurrencia de lluvia** (`llueve`, binario sí/no). F1 ≈ **0.77** (Árbol), balanced accuracy ≈ 0.84. La lluvia intensa NO se modela (es rara y caótica); queda como variable descriptiva.
-- **Clustering → perfiles climáticos de estaciones**. K-Means K=4, silhouette ≈ 0.48; los grupos coinciden con bandas geográficas (norte/centro/sur).
+- **Pronóstico de lluvia → ocurrencia** (`llueve`, binario sí/no). F1 ≈ **0.77** (Árbol depth=8), balanced accuracy ≈ 0.84. Es un **pronóstico honesto**: usa solo información disponible de antemano (ubicación, mes, persistencia/lags de lluvia, atmosféricas) y **excluye la temperatura del mismo día**. La lluvia intensa NO se modela (es rara y caótica); queda como variable descriptiva.
+- **Clustering → zonas climáticas Köppen por estación**, **K=7** (= zonas con ≥3 estaciones, de 10 presentes en Chile continental). Variables = clima **medido por estación del año** (ubicación, altitud, temperatura y lluvia de verano/otoño/invierno/primavera); **Köppen se reserva como etiqueta externa**. El detalle estacional es clave porque Köppen se define por la estacionalidad (clima mediterráneo = verano seco): subió la recuperación de Köppen frente al promedio anual. Validación **intrínseca** (Hopkins ≈ 0.68, silhouette ≈ 0.41) + **extrínseca vs Köppen** (ARI ≈ 0.31, NMI ≈ 0.49, Fowlkes-Mallows ≈ 0.43). K-Means K=7 es el mejor recuperando las zonas. **Segunda granularidad (temporal):** un clustering de las mediciones mensuales normalizadas por estación recupera las **4 estaciones del año** (ARI ≈ 0.34) — el clima muestra estructura tanto espacial (Köppen) como temporal (estaciones).
 
 > **¿Por qué la regresión es de temperatura y no de lluvia?** Se midió que la lluvia diaria es ~89% ruido temporal (caos atmosférico): su R² topa en ~0.18–0.42 incluso con datos atmosféricos. La temperatura, en cambio, es predecible a escala diaria. Por eso la lluvia se modela como **clasificación** y la temperatura como **regresión**.
 
@@ -35,11 +35,11 @@ No requiere dependencias fuera de `requirements.txt` (numpy, pandas, matplotlib,
 
 ## Estructura del notebook (6 fases CRISP-DM)
 
-1. **Entendimiento del Negocio** — contexto, datos, hipótesis, KPIs, problema.
-2. **Entendimiento de Datos** — tipos, nulos, outliers, transformaciones, estadísticos, correlaciones, nuevas variables, zonas Köppen, mapas, dataset atmosférico. *(rica en gráficos)*
+1. **Entendimiento del Negocio** — contexto, datos, **6 hipótesis (2 por familia de modelo, trazables)**, KPIs, problema.
+2. **Entendimiento de Datos** — tipos, nulos, outliers, transformaciones, estadísticos, **2 matrices de correlación (inicial + general)**, nuevas variables, zonas Köppen, mapas, dataset atmosférico. *(rica en gráficos)*
 3. **Transformación** — escalamiento (ajustado solo en train).
 4. **Modelamiento** — vista general por familia (regresión, clasificación, cluster); 3 versiones de hiperparámetros por modelo, con gráficos propios de cada uno.
-5. **Evaluación** — métricas (accuracy, balanced accuracy, F1, RMSE/R²), matrices de confusión, curva ROC, residuos, codo/silhouette, dendrograma y análisis de sobreajuste.
+5. **Evaluación** — clasificación (accuracy, balanced accuracy, F1, matrices de confusión, curva ROC); regresión (RMSE/R², residuos); cluster segun el marco del Modulo 3 (tendencia con Hopkins; codo; calidad intrínseca silhouette/Calinski-Harabasz; extrínseca vs Köppen ARI/NMI/Fowlkes-Mallows), dendrograma; análisis de sobreajuste.
 6. **Deploy** — *pendiente* (ver `tareas.md`).
 
 ## Archivos
