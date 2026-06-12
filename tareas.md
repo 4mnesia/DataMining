@@ -21,9 +21,9 @@ Regla dura: el proyecto sigue `estructura.txt` al pie de la letra. No renombrar 
 
 | Familia | Mejor modelo | Métrica | Lectura honesta |
 |---|---|---|---|
-| Regresión | SVR RBF | R²=0.931, RMSE=1.46°C | Bueno. Sin sobreajuste (brecha train-test ≈0). |
-| Pronóstico (clasif.) | Árbol depth=8 | F1=0.767, balanced acc=0.837 | Aceptable. `llueve` se pronostica razonable, no excelente. Honesto: sin temp del mismo día. |
-| Cluster (HK1 espacial) | K-Means K=7 (zonas ≥3 est.) | silhouette=0.41, Hopkins=0.68 (intr.) / ARI=0.31, NMI=0.49, FM=0.42 (extr. vs Köppen) | K=7 = zonas Köppen bien representadas (10 presentes, 3 marginales). Clima medido (temp+nubosidad+humedad+lluvia+oscilación térmica diaria+índice de aridez; Köppen = etiqueta externa). |
+| Regresión | SVR RBF | R²=0.932, RMSE=1.40°C | Bueno. Sin sobreajuste (brecha train-test ≈0). |
+| Pronóstico (clasif.) | Árbol depth=16 | F1=0.792, balanced acc=0.849 | Aceptable. `llueve` se pronostica razonable, no excelente. Honesto: sin temp del mismo día. |
+| Cluster (HK1 espacial) | K-Means K=7 (zonas ≥3 est.) | silhouette=0.47, Hopkins=0.68 (intr.) / ARI=0.33, NMI=0.53, FM=0.44 (extr. vs Köppen) | K=7 = zonas Köppen bien representadas (10 presentes, 3 marginales). Clima medido (precipitación anual + temperatura media + índice de aridez; Köppen = etiqueta externa). |
 | Cluster (HK2 temporal) | K-Means K=4 (mes×estación normalizado) | ARI=0.34, NMI=0.39 (vs estación del año) | Recupera las 4 estaciones del año desde las mediciones mensuales normalizadas por estación; verano/invierno nítidos, otoño/primavera transición. |
 
 No vender estos números como sobresalientes. La regresión es sólida; clasificación y cluster son correctos pero no destacados. El cluster cubre el marco del PPT (Modulo 3, 3 tareas): tendencia (Hopkins=0.68), n° clusters (codo/KneeLocator), calidad INTRÍNSECA (silhouette, inercia, Calinski-Harabasz) y EXTRÍNSECA vs Köppen (ARI, NMI, Fowlkes-Mallows). Köppen no se usa como variable. Calinski-Harabasz SÍ se usa (lo pide el PPT).
@@ -38,7 +38,7 @@ No vender estos números como sobresalientes. La regresión es sólida; clasific
 
 ## 4. Puntos débiles a revisar (no son errores de ejecución, son de criterio)
 
-- [ ] **Cluster K=7 = zonas Köppen con ≥3 estaciones (validación intrínseca + extrínseca).** 7 de 10 zonas presentes (3 marginales Csc/Dfc/ET con 1-2 est. se documentan, no forman grupo). Sobre **clima MEDIDO** (temperatura + nubosidad + humedad + lluvia como feature + oscilación térmica diaria + índice de aridez (balance hídrico)); **Köppen se reserva como etiqueta externa**. Validación PPT Módulo 3: tendencia (Hopkins=0.68), codo/KneeLocator (K=5), intrínseca (silhouette=0.41, Calinski-Harabasz=120) y extrínseca vs Köppen (ARI=0.31, NMI=0.49, Fowlkes-Mallows=0.42). El perfil estacional subió la recuperación de Köppen (ARI 0.26→0.32). Se excluyen 2 insulares. Nota: por silhouette gana K=4 (macro), pero se destaca K=7 porque recupera mejor las zonas (ARI) — verificar que el texto justifique esa elección.
+- [ ] **Cluster K=7 = zonas Köppen con ≥3 estaciones (validación intrínseca + extrínseca).** 7 de 10 zonas presentes (3 marginales Csc/Dfc/ET con 1-2 est. se documentan, no forman grupo). Sobre **clima MEDIDO** (precipitación anual + temperatura media + índice de aridez (balance hídrico)); **Köppen se reserva como etiqueta externa**. Validación PPT Módulo 3: tendencia (Hopkins=0.68), codo/KneeLocator (K=4), intrínseca (silhouette=0.47, Calinski-Harabasz=200) y extrínseca vs Köppen (ARI=0.33, NMI=0.53, Fowlkes-Mallows=0.44). El núcleo precip+temp+aridez maximiza la recuperación de Köppen. Se excluyen 2 insulares. Nota: por silhouette gana K=4 (macro), pero se destaca K=7 porque recupera mejor las zonas (ARI) — verificar que el texto justifique esa elección.
 - [ ] **`lluvia_intensa` quedó como variable de EDA, no de modelo.** Se descartó como objetivo de clasificación por ser rara (~4.6%) y caótica. Confirmar que ningún texto la presente como objetivo predictivo. Se definió con la regla de Tukey (Q3+1.5·IQR) y tiene una versión "sostenida" (con persistencia). Revisar que el relato sea consistente.
 - [ ] **Gráfico SVM 2D es ilustrativo, no real.** Usa solo 2 de ~25 variables (no se puede dibujar el margen real en 25D). El texto lo aclara, pero verificar que nadie lo interprete como el desempeño real del modelo.
 - [ ] **El R² alto de regresión (0.93) puede dar falsa impresión.** Es temperatura, no lluvia. La temperatura es intrínsecamente más fácil. No presentarlo como "predecimos el clima con 93% de acierto".
@@ -72,7 +72,7 @@ Requiere **internet**: los datos se leen en memoria desde raw URLs de GitHub (`4
 - Patrón por paso: encabezado breve → código → análisis del output. Sin "mini-objetivos".
 - Fase 4 = vista general de modelos. Fase 5 = evaluación (métricas, matrices, codo/silhouette, sobreajuste). No mezclar.
 - De cada modelo de regresión y clasificación se prueban 3 versiones de hiperparámetros; se elige por validación, sin tocar el test.
-- Imputación y escalado se ajustan SOLO en train (sin fuga). Split temporal 2021-2023 / 2024-2025.
+- Imputación y escalado se ajustan SOLO en train (sin fuga). Split aleatorio 70/30.
 - Español sin tildes en código y markdown del notebook (estilo consistente).
 - El `.ipynb` pesa ~7 MB (gráficos embebidos). No abrirlo entero en editores lentos; editar por celda.
 

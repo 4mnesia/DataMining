@@ -8,7 +8,7 @@ Cada técnica se aplica a la variable que mejor predice:
 
 - **Regresión → temperatura media diaria (`temp_media`).** R² ≈ 0.93 (SVR). La lluvia diaria es caótica (techo R² ≈ 0.18–0.42 incluso con datos atmosféricos), por lo que NO se usa como objetivo de regresión.
 - **Pronóstico de lluvia → ocurrencia** (`llueve`, binario). 3 modelos: Regresión Logística, SVM (RBF), Árbol de decisión; versión por **validación cruzada**. Manejo de desbalance con `class_weight='balanced'` + **ajuste de umbral** en validación. **Pronóstico honesto:** sin temperatura del mismo día (solo info de antemano). `lluvia_intensa` NO se modela (solo variable descriptiva de EDA).
-- **Clustering → zonas climáticas Köppen, K=7** (= zonas con ≥3 estaciones; K-Means K=7, K-Means K=4 macro y Jerárquico K=7 ward). Variables = clima MEDIDO **por estación del año** `latitud+altura+temp_verano/invierno+lluvia_verano/otono/invierno/primavera+frecuencia_lluvia` (Köppen se define por estacionalidad), QuantileTransformer, sin insulares. **Köppen NO es variable: etiqueta externa** para validación extrínseca.
+- **Clustering → zonas climáticas Köppen, K=7** (= zonas con ≥3 estaciones; K-Means K=7, K-Means K=4 macro y Jerárquico K=7 ward). Variables = núcleo climático de Köppen `precipitación anual + temperatura media + índice de aridez`, QuantileTransformer, sin insulares. **Köppen NO es variable: etiqueta externa** para validación extrínseca.
 
 ## Datos (en memoria, sin descarga ni clon)
 
@@ -28,7 +28,7 @@ Apoyo: metadata de estaciones (`getEstacionesRedEma.json`), raster Köppen-Geige
 - Separar **Fase 4 (vista general, gráficos generales)** de **Fase 5 (evaluación: métricas, matrices de confusión, codo/silhouette, sobreajuste)**. De cada modelo se prueban **3 versiones** de hiperparámetros y se elige la mejor por validación.
 - Evitar "tablas de la nada": si el dato sale del `df`, sacarlo en duro (`df.dtypes`, `df.describe()`, `print`).
 - Imports solo arriba. Sin notas internas ni conversación en el notebook.
-- Ajustar imputación/escalado **solo en train** (sin fuga). Split temporal 2021-2023 / 2024-2025.
+- Ajustar imputación/escalado **solo en train** (sin fuga). Split aleatorio 70/30.
 
 ## Comando para ejecutar/verificar
 
@@ -49,9 +49,9 @@ Requiere internet (todo se baja de raw GitHub). `kneed` se asegura con `%pip ins
 
 ## Resultados actuales
 
-- **Regresión temperatura:** SVR R²=0.931, Lineal 0.918, Árbol 0.908 (RMSE ~1.5 °C).
-- **Pronóstico `llueve`:** Árbol F1=0.767 (balanced acc 0.837, depth=8 por CV), SVM 0.741, Logística 0.672. Sin temperatura del mismo día. Desbalance manejado con `class_weight='balanced'` + umbral ajustado + `nasa_precip` + lags atmosféricos. Se probó umbral por zona (descartado, peor que el global).
-- **Cluster (zonas Köppen, K=7):** intrínseca Hopkins=0.68, K-Means K=7 silhouette=0.413, Calinski=114.5, codo=K=5; extrínseca vs Köppen K-Means K=7 ARI=0.309, NMI=0.493, Fowlkes-Mallows=0.421 (el mejor). Clima medido (temp+nubosidad+humedad+lluvia+oscilación térmica diaria+índice de aridez; Köppen reservado como etiqueta externa). El perfil estacional subió la recuperación de Köppen (ARI 0.26→0.32). **HK2 (temporal):** clustering de mediciones mensuales normalizadas por estación → recupera las 4 estaciones del año (ARI 0.34 vs estación).
+- **Regresión temperatura:** SVR R²=0.932, Lineal 0.914, Árbol 0.928 (RMSE ~1.4 °C).
+- **Pronóstico `llueve`:** Árbol F1=0.792 (balanced acc 0.849, depth=16 por CV), SVM 0.766, Logística 0.679. Sin temperatura del mismo día. Desbalance manejado con `class_weight='balanced'` + umbral ajustado + `nasa_precip` + lags atmosféricos. Se probó umbral por zona (descartado, peor que el global).
+- **Cluster (zonas Köppen, K=7):** intrínseca Hopkins=0.68, K-Means K=7 silhouette=0.467, Calinski=200, codo=K=4; extrínseca vs Köppen K-Means K=7 ARI=0.333, NMI=0.533, Fowlkes-Mallows=0.441 (el mejor). Clima medido (precipitación anual + temperatura media + índice de aridez; Köppen reservado como etiqueta externa). El núcleo precip+temp+aridez maximiza la recuperación de Köppen. **HK2 (temporal):** clustering de mediciones mensuales normalizadas por estación → recupera las 4 estaciones del año (ARI 0.34 vs estación).
 - `lluvia_intensa` **no se modela**: quedó como variable descriptiva de EDA (rara ~4.6% y caótica).
 
 ## Trabajar con el notebook
