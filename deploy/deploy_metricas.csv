@@ -1,0 +1,5 @@
+﻿familia,modelo,objetivo,metrica,valor
+Regresion,SVR RBF,temp_media,R2,0.932
+Clasificacion,Arbol (depth=16),llueve,F1,0.792
+Cluster,K-Means K=7,zonas Koppen,silhouette,0.467
+Cluster,K-Means K=7,zonas Koppen,ARI vs Koppen,0.333

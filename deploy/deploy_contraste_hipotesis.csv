@@ -1,0 +1,7 @@
+﻿familia,hipotesis,X,n_vars,metrica,valor
+Regresion,HR1: ubicacion + epoca,X_train_reg1,5,R2,0.679
+Regresion,HR2: atmosferico + persistencia,X_train_reg2,13,R2,0.911
+Regresion,X completa (reg1 + reg2),X_train_reg,18,R2,0.914
+Clasificacion,HC1: estacional + territorial,X_train_clf1,23,F1,0.624
+Clasificacion,HC2: persistencia (lags),X_train_clf2,3,F1,0.715
+Clasificacion,X completa (clf1 + clf2),X_train_clf,44,F1,0.787
