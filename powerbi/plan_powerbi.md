@@ -56,10 +56,22 @@ Dos tipos de visual:
 | Tabla de grupos | 🟦 Tabla | `cluster_grupo`, `cluster_koppen_dominante`, prom. `precip_anual`, `temp_media`, `aridez` |
 
 ## Página 5 — Insights y acciones estratégicas
-Las 3 acciones (las de la Fase 6 del notebook), cada una con un visual nativo de apoyo al lado:
-1. **Gestión hídrica diferenciada por zona** → barras `precip_anual` por `zona_koppen_codigo`.
-2. **Planificación agrícola por régimen térmico** → `temp_media` y `rango_termico` por `macrozona`.
-3. **Pronóstico operativo de lluvia donde es confiable** → `Accuracy Lluvia` por `zona_koppen_codigo`/`mes`.
+Tres acciones, cada una con su evidencia medida y un visual nativo de apoyo al lado. Texto listo para pegar en cajas de texto:
+
+**1. Gestión hídrica diferenciada por zona climática.**
+*Insight:* el cluster K-Means (K=7) recupera zonas con regímenes hídricos opuestos; el índice de aridez separa el norte árido (clase B, precipitación anual ~100–400 mm) del sur lluvioso (Cfb, sobre 1.200 mm).
+*Acción:* asignar cuotas de riego, capacidad de embalses y políticas de sequía según el grupo climático de cada estación —eficiencia y almacenamiento en los clusters áridos del norte; gestión de excedentes e hidroelectricidad en los lluviosos del sur—, en lugar de una norma nacional única.
+→ Visual de apoyo: barras `precip_anual` por `zona_koppen_codigo`.
+
+**2. Pronóstico operativo de lluvia donde es confiable.**
+*Insight:* el clasificador acierta entre 82% y 91% según el mes (más alto en verano, más bajo en invierno; F1 ≈ 0.79).
+*Acción:* activar avisos operativos (agricultura, transporte, defensa civil) apoyándose en el pronóstico durante las ventanas de alta confianza, y reforzar con márgenes de seguridad en las zonas y meses de menor acierto, en vez de confiar en un valor puntual.
+→ Visual de apoyo: `Accuracy Lluvia` por `zona_koppen_codigo` / `mes`.
+
+**3. Planificación térmica para energía y agricultura.**
+*Insight:* la temperatura media diaria es altamente predecible (R² ≈ 0.93), con error de solo 0.62 °C en el Norte Grande y ~1.07 °C en el centro-sur.
+*Acción:* anticipar demanda energética (calefacción/refrigeración) y riesgo de heladas (temperaturas mínimas bajo cero) por estación y temporada, con máxima confianza en el norte, donde el modelo permite una planificación más fina.
+→ Visual de apoyo: `temp_media` y `rango_termico` por `macrozona`.
 
 ---
 
