@@ -32,7 +32,10 @@ No vender estos números como sobresalientes. La regresión es sólida; clasific
 
 ## 3. Lo que falta (obligatorio antes de entregar)
 
-- [ ] **Fase 6 — Deploy.** Está VACÍA (1 celda de código sin contenido). El material 3.6 (Toma de Decisiones) la cubre. Falta la ficha de despliegue: entradas, salidas, usuario, frecuencia, riesgos, e integración con la toma de decisiones. Es la única sección de la estructura sin hacer.
+- [x] **Fase 6 — Deploy.** HECHA. La celda de la Fase 6 puntúa todas las filas con el mejor modelo de cada familia (SVR temperatura, Árbol lluvia, K-Means cluster) y exporta un único `powerbi/panel_powerbi.csv` (dataset tratado + predicciones + `conjunto` train/test). Más abajo hay insights y 3 acciones estratégicas (apoyo a la toma de decisiones).
+- [x] **Panel de control en Power BI.** Carpeta `powerbi/`: `panel_powerbi.csv` (datos exportados), `medidas_dax.md` (medidas DAX; las de desempeño filtran `conjunto = "test"`), `plan_powerbi.md` (5 páginas, visuales nativos + visuales de Python para ROC/confusión/residuos/dendrograma).
+
+> **Estado:** la estructura obligatoria (6 fases) está completa. Queda pulir/entregar.
 
 ---
 
@@ -42,6 +45,7 @@ No vender estos números como sobresalientes. La regresión es sólida; clasific
 - [ ] **`lluvia_intensa` quedó como variable de EDA, no de modelo.** Se descartó como objetivo de clasificación por ser rara (~4.6%) y caótica. Confirmar que ningún texto la presente como objetivo predictivo. Se definió con la regla de Tukey (Q3+1.5·IQR) y tiene una versión "sostenida" (con persistencia). Revisar que el relato sea consistente.
 - [ ] **Gráfico SVM 2D es ilustrativo, no real.** Usa solo 2 de ~25 variables (no se puede dibujar el margen real en 25D). El texto lo aclara, pero verificar que nadie lo interprete como el desempeño real del modelo.
 - [ ] **El R² alto de regresión (0.93) puede dar falsa impresión.** Es temperatura, no lluvia. La temperatura es intrínsecamente más fácil. No presentarlo como "predecimos el clima con 93% de acierto".
+- [x] **Datos exportados al CSV: auditados y curados (caja negra → datos limpios).** El export parte de `df_eda` pero la Fase 6 lo deja en **36 columnas esenciales, 0 nulos**. Correcciones aplicadas: (a) consistencia física de temperatura `temp_min ≤ temp_media ≤ temp_max` (la imputación por mediana dejaba ~0.5% de filas con el orden roto → `rango_termico` negativo; se reordena el trío por fila); (b) se quitan `isoterma_cero` (artefacto de ingeniería, rango imposible, redundante con altura+temp) y `lluvia_ayer` (lag de modelado sin insight propio en el panel). `agua_caida` cruda se descarta (se conserva `agua_caida_tratada`, capada a 150 mm). Los "outliers" de lluvia/altura que marca el IQR NO son errores: son la naturaleza real del dato (lluvia cero-inflada, estaciones de cordillera).
 
 ---
 
@@ -53,13 +57,14 @@ Ejecutar el notebook completo y confirmar que no hay fallos:
 python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 EV2_BIY7121_005D.ipynb
 ```
 
-Checklist post-ejecución (al cierre de esta sesión, todo OK menos Deploy):
+Checklist post-ejecución:
 - [x] 0 errores de ejecución
 - [x] 0 warnings (stderr) en outputs
-- [x] Numeración de celdas monótona (1→98, sin saltos)
-- [x] Sin celdas de código vacías salvo Fase 6 (placeholder)
+- [x] Numeración de celdas monótona, sin saltos
+- [x] Sin celdas de código vacías
 - [x] Sin imports muertos, sin DataFrames "de la nada"
-- [ ] Fase 6 completada (pendiente)
+- [x] Fase 6 completada (Deploy + export a Power BI)
+- [x] Notebook escrito sin tildes (estilo consistente; se conservan Köppen, R², °C)
 
 Requiere **internet**: los datos se leen en memoria desde raw URLs de GitHub (`4mnesia/DataMining_Datos`), no hay archivos locales.
 

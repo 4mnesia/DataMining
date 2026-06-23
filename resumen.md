@@ -27,7 +27,7 @@ Dos datasets, ambos en memoria desde raw GitHub (`4mnesia/DataMining_Datos`):
 - **Fase 3** Transformación: solo escalamiento. Hecha.
 - **Fase 4** Modelamiento: 4.1 regresión (3 modelos + gráficos propios), 4.2 clasificación (3 modelos × 3 versiones + ajuste de umbral), 4.3 cluster (K-Means K=7 + K-Means K=4 macro + Jerárquico K=7 ward). Hecha.
 - **Fase 5** Evaluación: métricas (incl. balanced accuracy), matrices de confusión, ROC, residuos, codo, silhouette, dendrograma, mapas, sobreajuste, mejoras. Hecha.
-- **Fase 6** Deploy: **VACÍA. Pendiente.**
+- **Fase 6** Deploy: **HECHA.** Puntúa todas las filas con el mejor modelo de cada familia y exporta `powerbi/panel_powerbi.csv` (dataset tratado + predicciones + `conjunto` train/test). Incluye insights y 3 acciones estratégicas. Panel de control en `powerbi/` (`panel_powerbi.csv`, `medidas_dax.md`, `plan_powerbi.md`).
 
 ## Resultados (medidos)
 
@@ -37,4 +37,4 @@ Dos datasets, ambos en memoria desde raw GitHub (`4mnesia/DataMining_Datos`):
 
 ## Estado técnico
 
-Notebook ejecuta de punta a punta sin errores ni warnings, numeración monótona, 57 gráficos. Para detalle de pendientes y revisión crítica, ver `tareas.md`.
+Notebook ejecuta de punta a punta sin errores ni warnings, numeración monótona, ~57 gráficos. Escrito sin tildes (estilo consistente; se conservan Köppen, R², °C). Las 6 fases CRISP-DM están completas (incluida Fase 6 Deploy + export a Power BI). El CSV exportado quedó curado: 36 columnas esenciales, 0 nulos, temperatura con orden físico válido (`temp_min ≤ temp_media ≤ temp_max`). Para detalle de revisión crítica, ver `tareas.md`.

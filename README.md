@@ -40,17 +40,19 @@ No requiere dependencias fuera de `requirements.txt` (numpy, pandas, matplotlib,
 3. **Transformación** — escalamiento (ajustado solo en train).
 4. **Modelamiento** — vista general por familia (regresión, clasificación, cluster); 3 versiones de hiperparámetros por modelo, con gráficos propios de cada uno.
 5. **Evaluación** — clasificación (accuracy, balanced accuracy, F1, matrices de confusión, curva ROC); regresión (RMSE/R², residuos); cluster segun el marco del Modulo 3 (tendencia con Hopkins; codo; calidad intrínseca silhouette/Calinski-Harabasz; extrínseca vs Köppen ARI/NMI/Fowlkes-Mallows), dendrograma; análisis de sobreajuste.
-6. **Deploy** — *pendiente* (ver `tareas.md`).
+6. **Deploy** — puntúa todas las filas con el mejor modelo de cada familia y exporta un único `powerbi/panel_powerbi.csv` (dataset tratado + predicciones + `conjunto` train/test); insights y 3 acciones estratégicas. Alimenta el panel de Power BI (`powerbi/`).
 
 ## Archivos
 
 | Archivo | Descripción |
 |---|---|
 | `EV2_BIY7121_005D.ipynb` | Notebook principal (el entregable) |
-| `atmosfera_diario.csv` | Dataset atmosférico NASA POWER (también en el repo de datos) |
 | `estructura.txt` | Estructura oficial obligatoria del proyecto |
 | `requirements.txt` | Dependencias |
-| `tareas.md` | **Tareas pendientes y revisión crítica para el equipo** |
-| `CLAUDE.md` | Guía para asistentes de IA |
-| `PLAN_DE_TRABAJO_DATAMINING.md` | Guía operativa del proyecto |
-| `PLAN_DE_MEJORAS.md` | Estado y mejoras |
+| `powerbi/panel_powerbi.csv` | Datos exportados por la Fase 6 (dataset tratado + predicciones + `conjunto`) |
+| `powerbi/medidas_dax.md` | Medidas DAX del panel (las de desempeño filtran `conjunto = "test"`) |
+| `powerbi/plan_powerbi.md` | Plan del panel (5 páginas; visuales nativos + visuales de Python) |
+| `tareas.md` | **Tareas y revisión crítica para el equipo** |
+| `resumen.md` | Resumen del estado del proyecto para retomarlo |
+| `CLAUDE.md` / `AGENTS.md` | Guías para asistentes de IA |
+| `material de apoyo/` | Material del curso y rúbricas (referencia, no es parte del entregable) |
