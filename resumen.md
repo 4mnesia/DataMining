@@ -31,7 +31,7 @@ Dos datasets, ambos en memoria desde raw GitHub (`4mnesia/DataMining_Datos`):
 
 ## Resultados (medidos)
 
-- Regresión: SVR R²=0.932 / Lineal 0.914 / Árbol 0.928, RMSE≈1.4°C, sin sobreajuste.
+- Regresión: SVR R²=0.933 / Lineal 0.914 / Árbol 0.929, RMSE≈1.39°C, sin sobreajuste.
 - Pronóstico `llueve`: Árbol F1=0.792 (depth=16, elegido por CV) / SVM 0.766 / Logística 0.679. Sin temperatura del mismo día. Se probó umbral por zona: peor que el global (descartado).
 - Cluster (K=7 = zonas Köppen con ≥3 estaciones, de 10 presentes): clima MEDIDO (precipitación anual + temperatura media + índice de aridez (balance hídrico)), QuantileTransformer + PCA-2, sin las 2 insulares; Köppen reservado como etiqueta externa. Intrínseca: Hopkins=0.68, K-Means K=7 silhouette=0.467, Calinski=200, codo=K=4. Extrínseca vs Köppen: K-Means K=7 ARI=0.333, NMI=0.533, Fowlkes-Mallows=0.441 (el mejor). El núcleo precip+temp+aridez maximiza la recuperación de Köppen, 
 
