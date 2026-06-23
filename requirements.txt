@@ -1,4 +1,4 @@
-# Dependencias para EV2_BIY7121_005D.ipynb
+# Dependencias para EV3_BIY7121_005D.ipynb
 ipykernel
 ipython
 matplotlib

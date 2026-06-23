@@ -1,4 +1,4 @@
-# Tareas pendientes y revisión — `EV2_BIY7121_005D.ipynb`
+# Tareas pendientes y revisión — `EV3_BIY7121_005D.ipynb`
 
 Documento de trabajo para el equipo. Estado al cierre de la última sesión. El notebook **no está terminado** y tiene puntos que requieren revisión crítica antes de la entrega. Leer completo antes de tocar nada.
 
@@ -54,7 +54,7 @@ No vender estos números como sobresalientes. La regresión es sólida; clasific
 Ejecutar el notebook completo y confirmar que no hay fallos:
 
 ```bash
-python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 EV2_BIY7121_005D.ipynb
+python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 EV3_BIY7121_005D.ipynb
 ```
 
 Checklist post-ejecución:

@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Qué es este repo
 
-Proyecto académico de **Minería de Datos** (CRISP-DM) sobre precipitación/temperatura en Chile (109 estaciones, 16 regiones, 2021–2025). Todo el trabajo vive en **un solo notebook**: `EV2_BIY7121_005D.ipynb`. No es una aplicación; el "entregable" es el notebook ejecutado y defendible frente a una rúbrica.
+Proyecto académico de **Minería de Datos** (CRISP-DM) sobre precipitación/temperatura en Chile (109 estaciones, 16 regiones, 2021–2025). Todo el trabajo vive en **un solo notebook**: `EV3_BIY7121_005D.ipynb`. No es una aplicación; el "entregable" es el notebook ejecutado y defendible frente a una rúbrica.
 
 ## Comandos
 
 No hay build ni tests (es un notebook). El comando central es ejecutarlo de punta a punta para verificar que corre sin errores y regenerar outputs:
 
 ```bash
-python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=600 EV2_BIY7121_005D.ipynb
+python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=600 EV3_BIY7121_005D.ipynb
 ```
 
 - Usar `python -m nbconvert`, **no** `jupyter nbconvert`: el CLI `jupyter` no está en el PATH del entorno bash, pero el módulo sí está instalado.

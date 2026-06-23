@@ -1,6 +1,6 @@
 # Instrucciones para agentes
 
-El notebook `EV2_BIY7121_005D.ipynb` tiene una narrativa definida y validada con datos. No rehacer desde cero. Antes de cambiar el foco de cualquier modelo, leer la evidencia (la descomposición de varianza de la Fase 5).
+El notebook `EV3_BIY7121_005D.ipynb` tiene una narrativa definida y validada con datos. No rehacer desde cero. Antes de cambiar el foco de cualquier modelo, leer la evidencia (la descomposición de varianza de la Fase 5).
 
 ## Idioma y estilo
 

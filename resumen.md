@@ -1,6 +1,6 @@
 # Resumen del proyecto
 
-Estado actual del notebook `EV2_BIY7121_005D.ipynb` para retomarlo sin perder contexto. Proyecto EV2 Minería de Datos BIY7121-005D, CRISP-DM, sobre clima de Chile (109 estaciones, 2021-2025).
+Estado actual del notebook `EV3_BIY7121_005D.ipynb` para retomarlo sin perder contexto. Proyecto EV3 Minería de Datos BIY7121-005D, CRISP-DM, sobre clima de Chile (109 estaciones, 2021-2025).
 
 ## Decisión central (vigente)
 

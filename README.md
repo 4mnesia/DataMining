@@ -1,6 +1,6 @@
-# Análisis de clima en Chile — Minería de Datos (EV2)
+# Análisis de clima en Chile — Minería de Datos (EV3)
 
-Proyecto académico de **Minería de Datos** (metodología CRISP-DM) sobre precipitación y temperatura en Chile: **109 estaciones**, **16 regiones**, periodo **2021–2025**. Todo el trabajo vive en un único notebook: **`EV2_BIY7121_005D.ipynb`**.
+Proyecto académico de **Minería de Datos** (metodología CRISP-DM) sobre precipitación y temperatura en Chile: **109 estaciones**, **16 regiones**, periodo **2021–2025**. Todo el trabajo vive en un único notebook: **`EV3_BIY7121_005D.ipynb`**.
 
 ## Objetivo
 
@@ -28,7 +28,7 @@ Requiere Python con las dependencias de `requirements.txt` y **conexión a inter
 
 ```bash
 pip install -r requirements.txt
-python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 EV2_BIY7121_005D.ipynb
+python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=1800 EV3_BIY7121_005D.ipynb
 ```
 
 No requiere dependencias fuera de `requirements.txt` (numpy, pandas, matplotlib, scikit-learn, scipy, pillow, seaborn opcional).
@@ -46,7 +46,7 @@ No requiere dependencias fuera de `requirements.txt` (numpy, pandas, matplotlib,
 
 | Archivo | Descripción |
 |---|---|
-| `EV2_BIY7121_005D.ipynb` | Notebook principal (el entregable) |
+| `EV3_BIY7121_005D.ipynb` | Notebook principal (el entregable) |
 | `estructura.txt` | Estructura oficial obligatoria del proyecto |
 | `requirements.txt` | Dependencias |
 | `powerbi/panel_powerbi.csv` | Datos exportados por la Fase 6 (dataset tratado + predicciones + `conjunto`) |
